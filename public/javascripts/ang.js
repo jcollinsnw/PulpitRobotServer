@@ -10,7 +10,7 @@ angular.module('ng').run(['$rootScope', function($rootScope) {
       operation();
   };
 }]);
-var app = angular.module("pulpitRobot", ['adf', 'LocalStorageModule', 'ui.bootstrap', 'rzModule']);
+var app = angular.module("pulpitRobot", ['LocalStorageModule', 'ui.bootstrap', 'rzModule']);
 app.controller("pulpitControl", function($scope, localStorageService) {
     $scope.products = ["Milk", "Bread", "Cheese"];
     $scope.lcd = {'l1': "Pulpit Robot v1.0", "l2": "Ready", "backlight": true};

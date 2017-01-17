@@ -21,6 +21,8 @@ var sp = new SerialPort(_serialPort, {
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var ip = require("ip");
+
 
 app.engine('html', require('ejs').renderFile);
 // view engine setup
@@ -62,7 +64,7 @@ app.use(function(err, req, res, next) {
 });
 var sockets = {};
 io.on('connection', function (socket) {
-
+    sp.write('LC 1 0 1 IP:_'+ip.address());
     sp.on('data', function(data){
       console.log(data);
       socket.emit('output', data);
