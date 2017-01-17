@@ -1,0 +1,135 @@
+<html>
+<head>
+  <script src="jquery/dist/jquery.min.js"></script>
+  <script src="angular/angular.min.js"></script>
+  <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+  <script src="angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+  <script src="angular-dashboard-framework/dist/angular-dashboard-framework.min.js"></script>
+  <script src="angular-dashboard-framework/dist/angular-dashboard-framework-tpls.min.js"></script>
+  <script src="angular-local-storage/dist/angular-local-storage.min.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
+  <script src="javascripts/ang.js"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="bootstrap/dist/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="angular-ui-bootstrap/dist/ui-bootstrap-csp.css" />
+  <link rel="stylesheet" href="angular-dashboard-framework/dist/angular-dashboard-framework.min.css" />
+</head>
+
+<body ng-app="pulpitRobot" ng-controller="pulpitControl" ng-keydown="keyDown($event)" ng-keyup="keyUp($event)">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Pulpit</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Terminal</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!--<adf-dashboard
+            name="{{ name }}"
+            collapsible="{{ collapsible }}"
+            maximizable="{{ maximizable }}"
+            structure="4-8"
+            adf-model="model"
+            continuous-edit-mode="true"/>-->
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">Keyboard Control</div>
+        <div class="panel-body">
+          <center>
+            <label class="btn btn-primary" ng-class="{'btn-danger': kbControl}" uib-btn-checkbox ng-model="kbControl">
+                Keyboard Control
+            </label>
+          </center>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">LCD</div>
+        <div class="panel-body lcd-body" ng-click="lcdBacklight()">
+          <input class="lcd" ng-class="{'lcd-dim': !lcd.backlight}" ng-model="lcd.l1" ng-click="lcdBacklight()"></input>
+          <input class="lcd" ng-class="{'lcd-dim': !lcd.backlight}" ng-model="lcd.l2" ng-click="lcdBacklight()"></input>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">Status</div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-3 wheel">
+
+            </div>
+            <div class="col-xs-6 tlcd">
+
+            </div>
+            <div class="col-xs-3 wheel">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">
+
+            </div>
+            <div class="col-xs-6 body">
+
+            </div>
+            <div class="col-xs-3">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 wheel">
+
+            </div>
+            <div class="col-xs-6 body">
+
+            </div>
+            <div class="col-xs-3 wheel">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <div class="panel-heading">Camera</div>
+        <div class="panel-body webcam">
+          <img src="images/IMG_6414.jpg" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">Terminal</div>
+    <div class="panel-body">
+    <div class="" id="terminal"><span ng-repeat="line in output">
+      <span class="code" ng-class="line.code">{{line.code}}</span>
+      <span class="id">{{line.id}}</span>
+      <span class="rest">{{line.rest.join(" ")}}</span>
+      <br/>
+    </span></div>
+    <br />
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="PCode Command" ng-model="command">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="runCommand(command)">Execute</button>
+      </span>
+    </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
