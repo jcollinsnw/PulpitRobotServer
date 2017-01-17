@@ -1,0 +1,224 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'a',
+1 verbose cli   'saveng',
+1 verbose cli   'angular-ui-bootstrap' ]
+2 info using npm@1.4.21
+3 info using node@v0.10.29
+4 warn package.json roboweb@0.0.0 No README data
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'a', null ]
+7 verbose cache add name=undefined spec="a" args=["a",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'a',
+8 verbose parsed url   path: 'a',
+8 verbose parsed url   href: 'a' }
+9 verbose cache add [ 'saveng', null ]
+10 verbose cache add name=undefined spec="saveng" args=["saveng",null]
+11 verbose parsed url { protocol: null,
+11 verbose parsed url   slashes: null,
+11 verbose parsed url   auth: null,
+11 verbose parsed url   host: null,
+11 verbose parsed url   port: null,
+11 verbose parsed url   hostname: null,
+11 verbose parsed url   hash: null,
+11 verbose parsed url   search: null,
+11 verbose parsed url   query: null,
+11 verbose parsed url   pathname: 'saveng',
+11 verbose parsed url   path: 'saveng',
+11 verbose parsed url   href: 'saveng' }
+12 verbose cache add [ 'angular-ui-bootstrap', null ]
+13 verbose cache add name=undefined spec="angular-ui-bootstrap" args=["angular-ui-bootstrap",null]
+14 verbose parsed url { protocol: null,
+14 verbose parsed url   slashes: null,
+14 verbose parsed url   auth: null,
+14 verbose parsed url   host: null,
+14 verbose parsed url   port: null,
+14 verbose parsed url   hostname: null,
+14 verbose parsed url   hash: null,
+14 verbose parsed url   search: null,
+14 verbose parsed url   query: null,
+14 verbose parsed url   pathname: 'angular-ui-bootstrap',
+14 verbose parsed url   path: 'angular-ui-bootstrap',
+14 verbose parsed url   href: 'angular-ui-bootstrap' }
+15 silly lockFile 86f7e437-a a
+16 verbose lock a /home/pi/.npm/86f7e437-a.lock
+17 silly lockFile 6dec686a-saveng saveng
+18 verbose lock saveng /home/pi/.npm/6dec686a-saveng.lock
+19 silly lockFile f6770473-angular-ui-bootstrap angular-ui-bootstrap
+20 verbose lock angular-ui-bootstrap /home/pi/.npm/f6770473-angular-ui-bootstrap.lock
+21 silly lockFile 86f7e437-a a
+22 silly lockFile 86f7e437-a a
+23 silly lockFile 6dec686a-saveng saveng
+24 silly lockFile 6dec686a-saveng saveng
+25 silly lockFile f6770473-angular-ui-bootstrap angular-ui-bootstrap
+26 silly lockFile f6770473-angular-ui-bootstrap angular-ui-bootstrap
+27 verbose addNamed [ 'a', '' ]
+28 verbose addNamed [ null, '*' ]
+29 silly lockFile 0c2e6999-a a@
+30 verbose lock a@ /home/pi/.npm/0c2e6999-a.lock
+31 verbose addNamed [ 'saveng', '' ]
+32 verbose addNamed [ null, '*' ]
+33 silly lockFile 45eeeeb5-saveng saveng@
+34 verbose lock saveng@ /home/pi/.npm/45eeeeb5-saveng.lock
+35 verbose addNamed [ 'angular-ui-bootstrap', '' ]
+36 verbose addNamed [ null, '*' ]
+37 silly lockFile f47e147d-angular-ui-bootstrap angular-ui-bootstrap@
+38 verbose lock angular-ui-bootstrap@ /home/pi/.npm/f47e147d-angular-ui-bootstrap.lock
+39 silly addNameRange { name: 'a', range: '*', hasData: false }
+40 silly addNameRange { name: 'saveng', range: '*', hasData: false }
+41 verbose request where is /a
+42 verbose request registry https://registry.npmjs.org/
+43 verbose request id 083fef3ceb05096c
+44 verbose url raw /a
+45 verbose url resolving [ 'https://registry.npmjs.org/', './a' ]
+46 verbose url resolved https://registry.npmjs.org/a
+47 verbose request where is https://registry.npmjs.org/a
+48 info trying registry request attempt 1 at 01:25:34
+49 http GET https://registry.npmjs.org/a
+50 verbose request where is /saveng
+51 verbose request registry https://registry.npmjs.org/
+52 verbose url raw /saveng
+53 verbose url resolving [ 'https://registry.npmjs.org/', './saveng' ]
+54 verbose url resolved https://registry.npmjs.org/saveng
+55 verbose request where is https://registry.npmjs.org/saveng
+56 info trying registry request attempt 1 at 01:25:34
+57 http GET https://registry.npmjs.org/saveng
+58 http 200 https://registry.npmjs.org/a
+59 silly registry.get cb [ 200,
+59 silly registry.get   { server: 'nginx/1.10.1',
+59 silly registry.get     'content-type': 'application/json',
+59 silly registry.get     'last-modified': 'Fri, 19 Aug 2016 09:29:31 GMT',
+59 silly registry.get     etag: 'W/"57b6d17b-15dcf"',
+59 silly registry.get     'content-encoding': 'gzip',
+59 silly registry.get     'cache-control': 'max-age=300',
+59 silly registry.get     'content-length': '11046',
+59 silly registry.get     'accept-ranges': 'bytes',
+59 silly registry.get     date: 'Tue, 17 Jan 2017 01:25:35 GMT',
+59 silly registry.get     via: '1.1 varnish',
+59 silly registry.get     age: '0',
+59 silly registry.get     connection: 'keep-alive',
+59 silly registry.get     'x-served-by': 'cache-ord1744-ORD',
+59 silly registry.get     'x-cache': 'MISS',
+59 silly registry.get     'x-cache-hits': '0',
+59 silly registry.get     'x-timer': 'S1484616335.113380,VS0,VE22',
+59 silly registry.get     vary: 'Accept-Encoding' } ]
+60 silly addNameRange number 2 { name: 'a', range: '*', hasData: true }
+61 silly addNameRange versions [ 'a',
+61 silly addNameRange   [ '0.0.1',
+61 silly addNameRange     '0.0.2',
+61 silly addNameRange     '0.0.3',
+61 silly addNameRange     '0.0.4',
+61 silly addNameRange     '0.0.5',
+61 silly addNameRange     '0.0.6',
+61 silly addNameRange     '0.0.7',
+61 silly addNameRange     '0.0.8',
+61 silly addNameRange     '0.0.9',
+61 silly addNameRange     '0.1.0',
+61 silly addNameRange     '0.1.1',
+61 silly addNameRange     '0.1.2',
+61 silly addNameRange     '0.1.3',
+61 silly addNameRange     '0.1.4',
+61 silly addNameRange     '0.1.5',
+61 silly addNameRange     '0.1.6',
+61 silly addNameRange     '0.1.7',
+61 silly addNameRange     '0.1.8',
+61 silly addNameRange     '0.1.9',
+61 silly addNameRange     '0.2.0',
+61 silly addNameRange     '0.2.1',
+61 silly addNameRange     '0.2.3',
+61 silly addNameRange     '0.2.4',
+61 silly addNameRange     '0.2.5',
+61 silly addNameRange     '0.2.6',
+61 silly addNameRange     '0.2.7',
+61 silly addNameRange     '0.2.8',
+61 silly addNameRange     '0.2.9',
+61 silly addNameRange     '0.3.0',
+61 silly addNameRange     '0.3.3',
+61 silly addNameRange     '0.3.4',
+61 silly addNameRange     '0.3.5',
+61 silly addNameRange     '0.3.6',
+61 silly addNameRange     '0.3.7',
+61 silly addNameRange     '0.3.8',
+61 silly addNameRange     '0.4.0',
+61 silly addNameRange     '0.4.1',
+61 silly addNameRange     '0.4.2',
+61 silly addNameRange     '0.4.3',
+61 silly addNameRange     '0.4.4',
+61 silly addNameRange     '0.4.5',
+61 silly addNameRange     '0.4.6',
+61 silly addNameRange     '0.4.7',
+61 silly addNameRange     '0.4.8',
+61 silly addNameRange     '0.4.9',
+61 silly addNameRange     '0.5.0',
+61 silly addNameRange     '1.0.0',
+61 silly addNameRange     '1.0.1',
+61 silly addNameRange     '1.0.2',
+61 silly addNameRange     '2.0.0',
+61 silly addNameRange     '2.0.1',
+61 silly addNameRange     '2.0.2',
+61 silly addNameRange     '2.0.3',
+61 silly addNameRange     '2.0.4',
+61 silly addNameRange     '2.0.5',
+61 silly addNameRange     '2.0.6',
+61 silly addNameRange     '2.0.7',
+61 silly addNameRange     '2.0.8',
+61 silly addNameRange     '2.0.9',
+61 silly addNameRange     '2.0.10',
+61 silly addNameRange     '2.0.11',
+61 silly addNameRange     '2.0.12',
+61 silly addNameRange     '2.0.13',
+61 silly addNameRange     '2.1.0' ] ]
+62 verbose addNamed [ 'a', '2.1.0' ]
+63 verbose addNamed [ '2.1.0', '2.1.0' ]
+64 silly lockFile f9d44268-a-2-1-0 a@2.1.0
+65 verbose lock a@2.1.0 /home/pi/.npm/f9d44268-a-2-1-0.lock
+66 silly lockFile 8ef9eb52-registry-npmjs-org-a-a-2-1-0-tgz https://registry.npmjs.org/a/-/a-2.1.0.tgz
+67 verbose lock https://registry.npmjs.org/a/-/a-2.1.0.tgz /home/pi/.npm/8ef9eb52-registry-npmjs-org-a-a-2-1-0-tgz.lock
+68 verbose addRemoteTarball [ 'https://registry.npmjs.org/a/-/a-2.1.0.tgz',
+68 verbose addRemoteTarball   '834914a2472eeed68b2f513c9a52283272e2a38c' ]
+69 info retry fetch attempt 1 at 01:25:35
+70 verbose fetch to= /tmp/npm-5392-8vw2B24Z/registry.npmjs.org/a/-/a-2.1.0.tgz
+71 http GET https://registry.npmjs.org/a/-/a-2.1.0.tgz
+72 http 404 https://registry.npmjs.org/saveng
+73 silly registry.get cb [ 404,
+73 silly registry.get   { 'content-type': 'application/json',
+73 silly registry.get     'cache-control': 'max-age=0',
+73 silly registry.get     'content-length': '2',
+73 silly registry.get     'accept-ranges': 'bytes',
+73 silly registry.get     date: 'Tue, 17 Jan 2017 01:25:35 GMT',
+73 silly registry.get     via: '1.1 varnish',
+73 silly registry.get     age: '0',
+73 silly registry.get     connection: 'keep-alive',
+73 silly registry.get     'x-served-by': 'cache-ord1744-ORD',
+73 silly registry.get     'x-cache': 'MISS',
+73 silly registry.get     'x-cache-hits': '0',
+73 silly registry.get     'x-timer': 'S1484616335.131671,VS0,VE154',
+73 silly registry.get     vary: 'Accept-Encoding' } ]
+74 silly lockFile 45eeeeb5-saveng saveng@
+75 silly lockFile 45eeeeb5-saveng saveng@
+76 error 404 Not Found
+76 error 404
+76 error 404 'saveng' is not in the npm registry.
+76 error 404 You should bug the author to publish it
+76 error 404 It was specified as a dependency of 'roboweb'
+76 error 404
+76 error 404 Note that you can also install from a
+76 error 404 tarball, folder, or http url, or git url.
+77 error System Linux 4.4.21-v7+
+78 error command "/usr/bin/nodejs" "/usr/bin/npm" "install" "a" "saveng" "angular-ui-bootstrap"
+79 error cwd /home/pi/web
+80 error node -v v0.10.29
+81 error npm -v 1.4.21
+82 error code E404
+83 verbose exit [ 1, true ]
