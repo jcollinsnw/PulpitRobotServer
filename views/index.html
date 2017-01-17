@@ -8,6 +8,7 @@
   <script src="angular-dashboard-framework/dist/angular-dashboard-framework.min.js"></script>
   <script src="angular-dashboard-framework/dist/angular-dashboard-framework-tpls.min.js"></script>
   <script src="angular-local-storage/dist/angular-local-storage.min.js"></script>
+  <script src="angularjs-slider/dist/rzslider.min.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
   <script src="javascripts/ang.js"></script>
   <link rel="stylesheet" href="/stylesheets/style.css" />
@@ -15,6 +16,7 @@
   <link rel="stylesheet" href="bootstrap/dist/css/bootstrap-theme.min.css" />
   <link rel="stylesheet" href="angular-ui-bootstrap/dist/ui-bootstrap-csp.css" />
   <link rel="stylesheet" href="angular-dashboard-framework/dist/angular-dashboard-framework.min.css" />
+  <link rel="stylesheet" href="angularjs-slider/dist/rzslider.css"/>
 </head>
 
 <body ng-app="pulpitRobot" ng-controller="pulpitControl" ng-keydown="keyDown($event)" ng-keyup="keyUp($event)">
@@ -53,6 +55,9 @@
             <label class="btn btn-primary" ng-class="{'btn-danger': kbControl}" uib-btn-checkbox ng-model="kbControl">
                 Keyboard Control
             </label>
+            <rzslider
+             rz-slider-model="slider.value"
+             rz-slider-options="slider.options"></rzslider>
           </center>
         </div>
       </div>
@@ -106,7 +111,8 @@
       <div class="panel panel-default">
         <div class="panel-heading">Camera</div>
         <div class="panel-body webcam">
-          <img src="images/IMG_6414.jpg" />
+          <img src="" id="stream" ng-show="streaming"/>
+          <input type="button" class="btn btn-primary" value="Start Stream" ng-click="startstream()" ng-hide="streaming"/>
         </div>
       </div>
     </div>

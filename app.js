@@ -6,12 +6,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
+var fs = require('fs');
+var path = require('path');
+
+var spawn = require('child_process').spawn;
+var proc;
 
 var _serialPort = "/dev/cu.usbserial-A9007K9O";
 var SerialPort = require("serialport").SerialPort;
-/*var sp = new SerialPort(_serialPort, {
+var sp = new SerialPort(_serialPort, {
   parser: SerialPort.parsers.readline('\n')
-});*/
+});
 
 var app = express();
 var server = require('http').Server(app);
@@ -33,6 +38,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(path.join(__dirname, '/node_modules')));
 app.use(express.static(path.join(__dirname, '/node_modules/jade-bootstrap')));
+app.use('/', express.static(path.join(__dirname, 'stream')));
 
 app.use('/', index);
 app.use('/users', users);
@@ -54,18 +60,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+var sockets = {};
 io.on('connection', function (socket) {
-    console.log("Connected succesfully to the socket ...");
 
-    var news = [
-        { title: 'The cure of the Sadness is to play Videogames',date:'04.10.2016'},
-        { title: 'Batman saves Racoon City, the Joker is infected once again',date:'05.10.2016'},
-        { title: "Deadpool doesn't want to do a third part of the franchise",date:'05.10.2016'},
-        { title: 'Quicksilver demand Warner Bros. due to plagiarism with Speedy Gonzales',date:'04.10.2016'},
-    ];
-
-    // Send news on the socket
-    /*sp.on('data', function(data){
+    sp.on('data', function(data){
       console.log(data);
       socket.emit('output', data);
     });
@@ -79,11 +77,53 @@ io.on('connection', function (socket) {
             console.log(err);
           }
         });
-    });*/
-
+    });
+    sockets[socket.id] = socket;
+    console.log("Total clients connected : ", Object.keys(sockets).length);
+    /*
     socket.on('command', function(data) {
       socket.emit('output', "R " + data);
       console.log(data);
+    });*/
+    socket.on('disconnect', function() {
+      delete sockets[socket.id];
+
+      // no more sockets, kill the stream
+      if (Object.keys(sockets).length == 0) {
+        app.set('watchingFile', false);
+        if (proc) proc.kill();
+        fs.unwatchFile('./stream/image_stream.jpg');
+      }
+    });
+    socket.on('start-stream', function() {
+      startStreaming(io);
     });
 });
+function stopStreaming() {
+  if (Object.keys(sockets).length === 0) {
+    app.set('watchingFile', false);
+    if (proc) proc.kill();
+    fs.unwatchFile('./stream/image_stream.jpg');
+  }
+}
+
+function startStreaming(io) {
+
+  if (app.get('watchingFile')) {
+    io.sockets.emit('liveStream', 'image_stream.jpg?_t=' + (Math.random() * 100000));
+    return;
+  }
+
+  var args = ["-w", "640", "-h", "480", "-o", "./stream/image_stream.jpg", "-t", "999999999", "-tl", "100"];
+  proc = spawn('raspistill', args);
+  //raspistill
+
+  console.log('Watching for changes...');
+
+  app.set('watchingFile', true);
+
+  fs.watchFile('./stream/image_stream.jpg', function(current, previous) {
+    io.sockets.emit('liveStream', 'image_stream.jpg?_t=' + (Math.random() * 100000));
+  });
+}
 module.exports = {app: app, server: server};

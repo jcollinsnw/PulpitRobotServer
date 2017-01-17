@@ -10,10 +10,18 @@ angular.module('ng').run(['$rootScope', function($rootScope) {
       operation();
   };
 }]);
-var app = angular.module("pulpitRobot", ['adf', 'LocalStorageModule', 'ui.bootstrap']);
+var app = angular.module("pulpitRobot", ['adf', 'LocalStorageModule', 'ui.bootstrap', 'rzModule']);
 app.controller("pulpitControl", function($scope, localStorageService) {
     $scope.products = ["Milk", "Bread", "Cheese"];
     $scope.lcd = {'l1': "Pulpit Robot v1.0", "l2": "Ready", "backlight": true};
+    $scope.slider = {
+      value: 255,
+      options: {
+        floor: 0,
+        ceil: 255
+      }
+    };
+    $scope.streaming = false;
     $scope.keycodes = {
         65: 'a',
         83: 's',
@@ -42,74 +50,6 @@ app.controller("pulpitControl", function($scope, localStorageService) {
             s4() + '-' + s4() + s4() + s4();
     };
 
-    var name = 'sample-01';
-    var model = localStorageService.get(name);
-    if (!model) {
-        // set default model for demo purposes
-        model = {
-            title: "Control",
-            structure: "4-8",
-            rows: [{
-                columns: [{
-                    styleClass: "col-md-4",
-                    widgets: [{
-                        type: "linklist",
-                        config: {
-                            links: [{
-                                title: "SCM-Manager",
-                                href: "http://www.scm-manager.org"
-                            }, {
-                                title: "Github",
-                                href: "https://github.com"
-                            }, {
-                                title: "Bitbucket",
-                                href: "https://bitbucket.org"
-                            }, {
-                                title: "Stackoverflow",
-                                href: "http://stackoverflow.com"
-                            }]
-                        },
-                        title: "Links"
-                    }, {
-                        type: "weather",
-                        config: {
-                            location: "Hildesheim"
-                        },
-                        title: "Weather Hildesheim"
-                    }, {
-                        type: "weather",
-                        config: {
-                            location: "Edinburgh"
-                        },
-                        title: "Weather"
-                    }, {
-                        type: "weather",
-                        config: {
-                            location: "Dublin,IE"
-                        },
-                        title: "Weather"
-                    }]
-                }, {
-                    styleClass: "col-md-8",
-                    widgets: [{
-                        type: "randommsg",
-                        config: {},
-                        title: "Douglas Adams"
-                    }, {
-                        type: "markdown",
-                        config: {
-                            content: "![scm-manager logo](https://bitbucket.org/sdorra/scm-manager/wiki/resources/scm-manager_logo.jpg)\n\nThe easiest way to share and manage your Git, Mercurial and Subversion repositories over http.\n\n* Very easy installation\n* No need to hack configuration files, SCM-Manager is completely configureable from its Web-Interface\n* No Apache and no database installation is required\n* Central user, group and permission management\n* Out of the box support for Git, Mercurial and Subversion\n* Full RESTFul Web Service API (JSON and XML)\n* Rich User Interface\n* Simple Plugin API\n* Useful plugins available ( f.e. Ldap-, ActiveDirectory-, PAM-Authentication)\n* Licensed under the BSD-License"
-                        },
-                        title: "Markdown"
-                    }]
-                }]
-            }]
-        };
-    }
-    $scope.name = name;
-    $scope.model = model;
-
-
     $scope.collapsible = true;
     $scope.maximizable = true;
     $scope.output = [];
@@ -122,6 +62,15 @@ app.controller("pulpitControl", function($scope, localStorageService) {
       var textarea = document.getElementById('terminal');
       textarea.scrollTop = textarea.scrollHeight;
     });
+    $scope.socket.on('liveStream', function(url) {
+      $('#stream').attr('src', url);
+      $('.start').hide();
+    });
+
+    $scope.startstream = function() {
+      $scope.socket.emit('start-stream');
+      $scope.streaming = true;
+    };
 
     $scope.runCommand = function(command) {
         $scope.socket.emit('command', command);
@@ -171,25 +120,25 @@ app.controller("pulpitControl", function($scope, localStorageService) {
         if ($scope.kbControl && !$scope.key_down &&  $scope.validKeys.indexOf(kc) !== -1 ) {
             $scope.key_down = true;
             if( kc == 'w' || kc == 'up') {
-                $scope.motor(1, 255, $scope.forward);
-                $scope.motor(2, 255, $scope.forward);
-                $scope.motor(3, 255, $scope.forward);
-                $scope.motor(4, 255, $scope.forward);
+                $scope.motor(1, $scope.slider.value, $scope.forward);
+                $scope.motor(2, $scope.slider.value, $scope.forward);
+                $scope.motor(3, $scope.slider.value, $scope.forward);
+                $scope.motor(4, $scope.slider.value, $scope.forward);
             } else if( kc == 'a' || kc == 'left' ) {
-                $scope.motor(1, 255, $scope.reverse);
-                $scope.motor(2, 255, $scope.forward);
-                $scope.motor(3, 255, $scope.forward);
-                $scope.motor(4, 255, $scope.reverse);
+                $scope.motor(1, $scope.slider.value, $scope.reverse);
+                $scope.motor(2, $scope.slider.value, $scope.forward);
+                $scope.motor(3, $scope.slider.value, $scope.forward);
+                $scope.motor(4, $scope.slider.value, $scope.reverse);
             } else if( kc == 'd' || kc == 'right' ) {
-                $scope.motor(1, 255, $scope.forward);
-                $scope.motor(2, 255, $scope.reverse);
-                $scope.motor(3, 255, $scope.reverse);
-                $scope.motor(4, 255, $scope.forward);
+                $scope.motor(1, $scope.slider.value, $scope.forward);
+                $scope.motor(2, $scope.slider.value, $scope.reverse);
+                $scope.motor(3, $scope.slider.value, $scope.reverse);
+                $scope.motor(4, $scope.slider.value, $scope.forward);
             } else if( kc == 's' || kc == 'down' ) {
-                $scope.motor(1, 255, $scope.reverse);
-                $scope.motor(2, 255, $scope.reverse);
-                $scope.motor(3, 255, $scope.reverse);
-                $scope.motor(4, 255, $scope.reverse);
+                $scope.motor(1, $scope.slider.value, $scope.reverse);
+                $scope.motor(2, $scope.slider.value, $scope.reverse);
+                $scope.motor(3, $scope.slider.value, $scope.reverse);
+                $scope.motor(4, $scope.slider.value, $scope.reverse);
             }
         }
     };
