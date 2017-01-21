@@ -12,7 +12,7 @@ var path = require('path');
 var spawn = require('child_process').spawn;
 var proc;
 
-var _serialPort = "/dev/cu.usbserial-A9007K9O";
+var _serialPort = "/dev/ttyUSB0";
 var SerialPort = require("serialport").SerialPort;
 var sp = new SerialPort(_serialPort, {
   parser: SerialPort.parsers.readline('\n')
@@ -21,7 +21,7 @@ var sp = new SerialPort(_serialPort, {
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var ip = require("ip");
+//var ip = require("ip");
 
 
 app.engine('html', require('ejs').renderFile);
@@ -64,7 +64,7 @@ app.use(function(err, req, res, next) {
 });
 var sockets = {};
 io.on('connection', function (socket) {
-    sp.write('LC 1 0 1 IP:_'+ip.address());
+    //sp.write('LC 1 0 1 IP:_'+ip.address());
     sp.on('data', function(data){
       console.log(data);
       socket.emit('output', data);
@@ -75,6 +75,7 @@ io.on('connection', function (socket) {
 
     socket.on('command', function (data) {
         sp.write(data+"\r\n", function(err) {
+console.log(data);
           if( err ) {
             console.log(err);
           }
